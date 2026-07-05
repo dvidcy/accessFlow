@@ -1,122 +1,92 @@
 # AccessFlow — Guía de Instalación y Ejecución
 
-Sistema de asistencia escolar de secundaria con notificaciones por email a tutores.
+Sistema de asistencia escolar con notificaciones por email a tutores.
 
 ---
 
 ## Requisitos previos
 
-Asegúrate de tener instalado lo siguiente antes de comenzar:
-
 | Herramienta | Versión mínima | Descarga |
 |---|---|---|
-| Python | 3.9+ | https://www.python.org/downloads/ |
-| XAMPP | Cualquier versión reciente | https://www.apachefriends.org/ |
-| Git | Cualquier versión | https://git-scm.com/ |
+| Node.js | 18+ | https://nodejs.org |
+| XAMPP | Cualquier versión reciente | https://www.apachefriends.org |
+| Git | Cualquier versión | https://git-scm.com |
 
-> **Nota:** En macOS Python generalmente ya viene instalado. Verifica con `python3 --version` en la terminal.
-
----
-
-## 1. Clonar el repositorio
-
+Verifica que Node.js esté instalado:
 ```bash
-git clone <URL-del-repositorio>
-cd accessFlow
+node --version
+npm --version
 ```
 
 ---
 
-## 2. Levantar MySQL con XAMPP
+## 1. Levantar MySQL con XAMPP
 
 1. Abre el panel de control de XAMPP
-2. Haz clic en **Start** junto a **MySQL** (Apache es opcional)
-3. Verifica que MySQL esté corriendo (indicador verde)
+2. Haz clic en **Start** junto a **MySQL**
+3. Verifica que el indicador esté en verde
+
+> Apache es opcional — el proyecto no lo necesita.
 
 ---
 
-## 3. Crear la base de datos
+## 2. Crear la base de datos
 
-1. Abre tu navegador y entra a: `http://localhost/phpmyadmin`
+1. Abre tu navegador y entra a `http://localhost/phpmyadmin`
 2. En el panel izquierdo haz clic en **Nueva**
 3. Escribe el nombre: `accessflow_db`
 4. Selecciona cotejamiento: `utf8mb4_general_ci`
 5. Haz clic en **Crear**
 
-> La base de datos debe llamarse exactamente `accessflow_db`.
-
 ---
 
-## 4. Crear el entorno virtual
+## 3. Configurar variables de entorno
 
-En la raíz del proyecto ejecuta:
+Edita el archivo `server/.env` con tus credenciales:
 
-```bash
-# macOS / Linux
-python3 -m venv venv
-source venv/bin/activate
-
-# Windows
-python -m venv venv
-venv\Scripts\activate
-```
-
-Sabrás que el entorno está activo cuando veas `(venv)` al inicio de tu línea de comandos.
-
----
-
-## 5. Instalar dependencias
-
-Con el entorno virtual activo:
-
-```bash
-pip install -r requirements.txt
-```
-
-Esto instalará: `customtkinter`, `sqlalchemy`, `pymysql`, `bcrypt`, `yagmail`, `python-dotenv` y sus dependencias.
-
----
-
-## 6. Configurar el archivo `.env`
-
-El archivo `.env` contiene las credenciales del sistema. Ya existe en el proyecto con valores de ejemplo. Ábrelo y edítalo:
-
-```
-# Base de datos MySQL (XAMPP)
+```env
+# Base de datos
 DB_HOST=localhost
 DB_PORT=3306
 DB_NAME=accessflow_db
 DB_USER=root
-DB_PASSWORD=          ← dejar vacío si XAMPP no tiene contraseña (por defecto)
+DB_PASSWORD=          ← dejar vacío si XAMPP no tiene contraseña
 
-# SMTP Email (Gmail)
+# Email Gmail
 SMTP_EMAIL=tu_correo@gmail.com
 SMTP_PASSWORD=tu_app_password_aqui
+
+# JWT (puedes dejar el valor por defecto)
+JWT_SECRET=accessflow_secret_key_2024
+PORT=3001
 ```
 
-### Configurar email (Gmail) — opcional por ahora
+### Configurar App Password de Gmail (para notificaciones por email)
 
-Para que las notificaciones por email funcionen necesitas un **App Password** de Google:
-
-1. Ve a tu cuenta de Google → **Seguridad**
-2. Activa la **Verificación en dos pasos** (requerido)
+1. Ve a tu cuenta Google → **Seguridad**
+2. Activa la **Verificación en dos pasos**
 3. Busca **Contraseñas de aplicación**
-4. Genera una contraseña para "Correo" en "Otro dispositivo"
-5. Copia esa contraseña de 16 caracteres y pégala en `SMTP_PASSWORD`
+4. Genera una para "Correo" → copia los 16 caracteres
+5. Pégala en `SMTP_PASSWORD`
 
-> Si no configuras el email, la app funciona con normalidad pero no enviará notificaciones.
+> Si no configuras el email, el sistema funciona con normalidad pero no enviará notificaciones.
 
 ---
 
-## 7. Crear tablas e insertar datos de prueba
+## 4. Instalar dependencias e inicializar la base de datos
 
-Ejecuta el script de seed **una sola vez**:
+Abre una terminal en la raíz del proyecto y ejecuta:
 
 ```bash
-python db/seed.py
+# Instalar dependencias del servidor
+cd server
+npm install
+
+# Crear tablas e insertar datos de prueba (ejecutar solo una vez)
+node src/db/seed.js
 ```
 
-Esto creará automáticamente todas las tablas en MySQL e insertará:
+El seed crea automáticamente:
 
 | Dato | Detalle |
 |---|---|
@@ -125,17 +95,46 @@ Esto creará automáticamente todas las tablas en MySQL e insertará:
 | 5 Alumnos | Distribuidos entre los grupos |
 | 3 Tutores | Vinculados a los alumnos |
 
-> **Importante:** Solo ejecutar una vez. Si se ejecuta de nuevo con datos existentes, el script lo detecta y no hace nada.
+> Si ya ejecutaste el seed anteriormente, el script lo detecta y no hace nada.
 
 ---
 
-## 8. Ejecutar la aplicación
+## 5. Instalar dependencias del frontend
+
+Abre **otra terminal** en la raíz del proyecto:
 
 ```bash
-python main.py
+cd client
+npm install
 ```
 
-Se abrirá la ventana de login. Usa las credenciales del administrador de prueba:
+---
+
+## 6. Ejecutar la aplicación
+
+Necesitas **dos terminales abiertas al mismo tiempo**.
+
+**Terminal 1 — API (backend):**
+```bash
+cd server
+node src/index.js
+```
+Deberías ver:
+```
+AccessFlow API → http://localhost:3001
+```
+
+**Terminal 2 — Frontend:**
+```bash
+cd client
+npm run dev
+```
+Deberías ver:
+```
+VITE ready → http://localhost:5173
+```
+
+Abre tu navegador en **http://localhost:5173** e inicia sesión con:
 
 ```
 Correo:     admin@accessflow.com
@@ -148,32 +147,29 @@ Contraseña: admin123
 
 ```
 accessFlow/
-├── .env                  # Credenciales (NO subir a git)
-├── .gitignore
-├── main.py               # Punto de entrada
-├── config.py             # Carga variables del .env
-├── requirements.txt      # Dependencias Python
-├── PLAN.md               # Plan de desarrollo con progreso
-├── SETUP.md              # Este archivo
-├── db/
-│   ├── database.py       # Conexión SQLAlchemy
-│   ├── models.py         # Modelos ORM (tablas)
-│   └── seed.py           # Datos de prueba
-├── services/
-│   ├── auth.py           # Login y contraseñas
-│   ├── attendance.py     # Lógica de asistencia
-│   ├── email_service.py  # Envío de emails
-│   └── messaging.py      # Mensajes a tutores
-├── ui/
-│   ├── app.py            # Ventana principal
-│   ├── login.py          # Pantalla de login
-│   ├── dashboard.py      # Panel con menú lateral
-│   ├── attendance.py     # Registro de asistencia
-│   ├── students.py       # CRUD alumnos
-│   ├── groups.py         # CRUD grupos
-│   ├── tutors.py         # CRUD tutores
-│   └── messaging.py      # Mensajes individuales y grupales
-└── assets/               # Recursos gráficos (logo, íconos)
+├── server/                   # API Node.js (Express)
+│   ├── .env                  # Credenciales (NO subir a git)
+│   ├── package.json
+│   └── src/
+│       ├── index.js          # Punto de entrada del servidor
+│       ├── db/
+│       │   ├── connection.js # Conexión Sequelize
+│       │   ├── models/       # Modelos ORM (tablas)
+│       │   └── seed.js       # Datos de prueba
+│       ├── middleware/
+│       │   └── auth.js       # Verificación JWT
+│       ├── routes/           # auth, asistencia, alumnos, grupos, tutores, mensajes
+│       └── services/
+│           ├── attendance.js # Lógica de entrada/salida
+│           └── email.js      # Envío de correos
+└── client/                   # Frontend React (Vite)
+    ├── package.json
+    └── src/
+        ├── App.jsx           # Rutas + protección de páginas
+        ├── api/index.js      # Axios con token de autenticación
+        ├── context/          # Estado de sesión (AuthContext)
+        ├── components/       # Layout y Sidebar
+        └── pages/            # Login, Asistencia, Alumnos, Grupos, Tutores, Mensajes
 ```
 
 ---
@@ -181,43 +177,36 @@ accessFlow/
 ## Resumen de comandos
 
 ```bash
-# 1. Activar entorno virtual
-source venv/bin/activate          # macOS / Linux
-venv\Scripts\activate             # Windows
+# Terminal 1 — Servidor
+cd server && node src/index.js
 
-# 2. Instalar dependencias (solo la primera vez)
-pip install -r requirements.txt
+# Terminal 2 — Frontend
+cd client && npm run dev
 
-# 3. Crear tablas y datos de prueba (solo la primera vez)
-python db/seed.py
-
-# 4. Correr la aplicación
-python main.py
+# Seed (solo la primera vez)
+cd server && node src/db/seed.js
 ```
 
 ---
 
 ## Solución de problemas comunes
 
-### "No module named 'pymysql'"
-El entorno virtual no está activo. Ejecuta `source venv/bin/activate` primero.
-
-### "Access denied for user 'root'"
-XAMPP no está corriendo o la contraseña de MySQL no coincide. Revisa que MySQL esté activo en el panel de XAMPP y que `DB_PASSWORD` en `.env` sea correcto (vacío por defecto en XAMPP).
-
-### "Can't connect to MySQL server"
+### "Cannot connect to MySQL"
 MySQL no está iniciado. Abre XAMPP y haz clic en **Start** junto a **MySQL**.
 
-### "Unknown database 'accessflow_db'"
-La base de datos no fue creada. Sigue el paso 3 de esta guía.
+### "Access denied for user 'root'"
+La contraseña en `server/.env` no coincide. En XAMPP, por defecto `DB_PASSWORD` va vacío.
 
-### La ventana no abre / error de display (Linux)
-Instala las dependencias gráficas de Tkinter:
-```bash
-sudo apt-get install python3-tk
-```
+### "Unknown database 'accessflow_db'"
+La base de datos no fue creada. Sigue el paso 2 de esta guía.
 
 ### El email no llega
-- Verifica que `SMTP_EMAIL` y `SMTP_PASSWORD` en `.env` sean correctos
-- Asegúrate de usar un **App Password** de Google, no tu contraseña normal
-- Revisa la carpeta de spam del tutor destinatario
+- Verifica que `SMTP_EMAIL` y `SMTP_PASSWORD` en `server/.env` sean correctos
+- Usa un **App Password** de Google, no tu contraseña normal
+- Revisa la carpeta de spam del destinatario
+
+### Puerto 3001 en uso
+Cambia `PORT=3002` en `server/.env` y actualiza `vite.config.js`:
+```js
+proxy: { '/api': 'http://localhost:3002' }
+```
