@@ -92,18 +92,18 @@ accessFlow/
 
 ### FASE 2 — Base de Datos y Modelos
 
-- [ ] **2.1** Crear `db/database.py` — conexión SQLAlchemy + engine + sesión
-- [ ] **2.2** Crear `db/models.py` con los modelos:
-  - [ ] `Grupo`
-  - [ ] `Alumno`
-  - [ ] `Tutor`
-  - [ ] `AlumnoTutor` (tabla intermedia)
-  - [ ] `Admin`
-  - [ ] `Asistencia`
-  - [ ] `Mensaje`
-  - [ ] `MensajeDestinatario`
-- [ ] **2.3** Generar tablas con `Base.metadata.create_all()`
-- [ ] **2.4** Insertar datos de prueba (1 admin, 2 grupos, 5 alumnos, 3 tutores)
+- [x] **2.1** Crear `db/database.py` — conexión SQLAlchemy + engine + sesión
+- [x] **2.2** Crear `db/models.py` con los modelos:
+  - [x] `Grupo`
+  - [x] `Alumno`
+  - [x] `Tutor`
+  - [x] `AlumnoTutor` (tabla intermedia)
+  - [x] `Admin`
+  - [x] `Asistencia`
+  - [x] `Mensaje`
+  - [x] `MensajeDestinatario`
+- [x] **2.3** Generar tablas con `Base.metadata.create_all()`
+- [x] **2.4** Insertar datos de prueba (1 admin, 2 grupos, 5 alumnos, 3 tutores)
 
 ---
 
@@ -212,8 +212,8 @@ accessFlow/
 
 | Fase | Estado |
 |---|---|
-| 1 — Configuración | 🔄 En progreso (1.6 pendiente manual) |
-| 2 — Base de Datos | ⬜ Pendiente |
+| 1 — Configuración | ✅ Completo |
+| 2 — Base de Datos | ✅ Completo |
 | 3 — Servicios | ⬜ Pendiente |
 | 4 — UI | ⬜ Pendiente |
 | 5 — Integración | ⬜ Pendiente |
