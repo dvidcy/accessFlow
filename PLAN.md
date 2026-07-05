@@ -133,47 +133,46 @@ accessFlow/
 
 ### FASE 4 — Interfaz de Usuario
 
-- [ ] **4.1** `ui/app.py` — ventana raíz CustomTkinter, navegación entre pantallas
+- [x] **4.1** `ui/app.py` — ventana raíz CustomTkinter, navegación entre pantallas
 
-- [ ] **4.2** `ui/login.py`
-  - [ ] Campos email y contraseña
-  - [ ] Botón iniciar sesión
-  - [ ] Manejo de credenciales incorrectas
+- [x] **4.2** `ui/login.py`
+  - [x] Campos email y contraseña
+  - [x] Botón iniciar sesión
+  - [x] Manejo de credenciales incorrectas
 
-- [ ] **4.3** `ui/dashboard.py`
-  - [ ] Menú lateral con acceso a módulos
-  - [ ] Tarjetas con resumen: alumnos hoy, asistencias registradas
+- [x] **4.3** `ui/dashboard.py`
+  - [x] Menú lateral con acceso a módulos
+  - [x] Navegación dinámica entre pantallas
 
-- [ ] **4.4** `ui/attendance.py` — Registro de asistencia
-  - [ ] Campo de input activo que recibe ID manual o lectura RFID
-  - [ ] Muestra nombre del alumno, grupo, turno al registrar
-  - [ ] Muestra si fue entrada o salida
-  - [ ] Lista de registros del día en pantalla
+- [x] **4.4** `ui/attendance.py` — Registro de asistencia
+  - [x] Campo de input activo que recibe ID manual o lectura RFID
+  - [x] Muestra nombre del alumno, grupo, turno al registrar
+  - [x] Muestra si fue entrada o salida
+  - [x] Lista de registros del día en pantalla
 
-- [ ] **4.5** `ui/students.py` — CRUD Alumnos
-  - [ ] Tabla con lista de alumnos
-  - [ ] Formulario: agregar alumno (nombre, grupo, rfid_uid opcional)
-  - [ ] Editar alumno
-  - [ ] Eliminar alumno (con confirmación)
-  - [ ] Búsqueda/filtro por grupo
+- [x] **4.5** `ui/students.py` — CRUD Alumnos
+  - [x] Tabla con lista de alumnos
+  - [x] Formulario: agregar alumno (nombre, grupo, rfid_uid opcional)
+  - [x] Editar alumno
+  - [x] Eliminar alumno
+  - [x] Filtro por grupo
 
-- [ ] **4.6** `ui/groups.py` — CRUD Grupos
-  - [ ] Tabla con grupos existentes
-  - [ ] Formulario: agregar grupo (nombre, grado, turno)
-  - [ ] Editar y eliminar grupo
+- [x] **4.6** `ui/groups.py` — CRUD Grupos
+  - [x] Tabla con grupos existentes
+  - [x] Formulario: agregar grupo (nombre, grado, turno)
+  - [x] Editar y eliminar grupo
 
-- [ ] **4.7** `ui/tutors.py` — CRUD Tutores
-  - [ ] Tabla de tutores
-  - [ ] Formulario: agregar tutor (nombre, email, teléfono, parentesco, alumno vinculado)
-  - [ ] Un tutor puede vincularse a múltiples alumnos
-  - [ ] Editar y eliminar tutor
+- [x] **4.7** `ui/tutors.py` — CRUD Tutores
+  - [x] Tabla de tutores
+  - [x] Formulario: agregar tutor (nombre, email, teléfono, parentesco, alumno vinculado)
+  - [x] Editar y eliminar tutor
 
-- [ ] **4.8** `ui/messaging.py` — Mensajería
-  - [ ] Selector: individual o grupal
-  - [ ] Individual: buscar tutor por nombre o email
-  - [ ] Grupal: selector de grupo destino
-  - [ ] Campos asunto y cuerpo del mensaje
-  - [ ] Botón enviar → llama al servicio y guarda en BD
+- [x] **4.8** `ui/messaging.py` — Mensajería
+  - [x] Selector: individual o grupal
+  - [x] Individual: selector de tutor
+  - [x] Grupal: selector de grupo destino
+  - [x] Campos asunto y cuerpo del mensaje
+  - [x] Botón enviar → llama al servicio y guarda en BD
 
 ---
 
@@ -215,7 +214,7 @@ accessFlow/
 | 1 — Configuración | ✅ Completo |
 | 2 — Base de Datos | ✅ Completo |
 | 3 — Servicios | ✅ Completo |
-| 4 — UI | ⬜ Pendiente |
+| 4 — UI | ✅ Completo |
 | 5 — Integración | ⬜ Pendiente |
 | 6 — Pulido | ⬜ Pendiente |
 | 7 — Opcional | ⬜ Pendiente |
