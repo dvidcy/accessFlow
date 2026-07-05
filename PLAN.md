@@ -109,25 +109,25 @@ accessFlow/
 
 ### FASE 3 — Servicios (Lógica de Negocio)
 
-- [ ] **3.1** `services/auth.py`
-  - [ ] Función `login(email, password)` → valida contra BD
-  - [ ] Función `hash_password(plain)` y `verify_password(plain, hash)`
+- [x] **3.1** `services/auth.py`
+  - [x] Función `login(email, password)` → valida contra BD
+  - [x] Función `hash_password(plain)` y `verify_password(plain, hash)`
 
-- [ ] **3.2** `services/attendance.py`
-  - [ ] Función `registrar_asistencia(alumno_id)` → detecta si es entrada o salida
-  - [ ] Función `buscar_alumno_por_rfid(rfid_uid)`
-  - [ ] Función `buscar_alumno_por_id(id)`
-  - [ ] Función `get_asistencias_hoy()`
+- [x] **3.2** `services/attendance.py`
+  - [x] Función `registrar_asistencia(alumno_id)` → detecta si es entrada o salida
+  - [x] Función `buscar_alumno_por_rfid(rfid_uid)`
+  - [x] Función `buscar_alumno_por_id(id)`
+  - [x] Función `get_asistencias_hoy()`
 
-- [ ] **3.3** `services/email_service.py`
-  - [ ] Función `enviar_notificacion_entrada(tutor_email, alumno_nombre, hora)`
-  - [ ] Función `enviar_notificacion_salida(tutor_email, alumno_nombre, hora)`
-  - [ ] Función `enviar_mensaje_personalizado(tutor_email, asunto, cuerpo)`
+- [x] **3.3** `services/email_service.py`
+  - [x] Función `enviar_notificacion_entrada(tutor_email, alumno_nombre, hora)`
+  - [x] Función `enviar_notificacion_salida(tutor_email, alumno_nombre, hora)`
+  - [x] Función `enviar_mensaje_personalizado(tutor_email, asunto, cuerpo)`
 
-- [ ] **3.4** `services/messaging.py`
-  - [ ] Función `enviar_mensaje_individual(tutor_id, asunto, cuerpo, admin_id)`
-  - [ ] Función `enviar_mensaje_grupal(grupo_id, asunto, cuerpo, admin_id)` → obtiene todos los tutores del grupo y envía
-  - [ ] Guardar registro en tablas `Mensaje` y `MensajeDestinatario`
+- [x] **3.4** `services/messaging.py`
+  - [x] Función `enviar_mensaje_individual(tutor_id, asunto, cuerpo, admin_id)`
+  - [x] Función `enviar_mensaje_grupal(grupo_id, asunto, cuerpo, admin_id)` → obtiene todos los tutores del grupo y envía
+  - [x] Guardar registro en tablas `Mensaje` y `MensajeDestinatario`
 
 ---
 
@@ -214,7 +214,7 @@ accessFlow/
 |---|---|
 | 1 — Configuración | ✅ Completo |
 | 2 — Base de Datos | ✅ Completo |
-| 3 — Servicios | ⬜ Pendiente |
+| 3 — Servicios | ✅ Completo |
 | 4 — UI | ⬜ Pendiente |
 | 5 — Integración | ⬜ Pendiente |
 | 6 — Pulido | ⬜ Pendiente |
